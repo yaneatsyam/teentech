@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TeenTech — a digital playground for technology, culture, creativity and the chronically online.">
+<title>TEENTECH ★ digital playground</title>
+
+<!--
+  TEENTECH — SINGLE FILE GITHUB PAGES WEBSITE
+  Everything is in this file.
+  EDITABLE SPOTS are marked with ✎ EDIT.
+  Replace AUDIO_URL with a direct .mp3/.ogg URL if you want the radio to play music.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root{
+  --blue:#146cff;
+  --pink:#ff4fa3;
+  --lilac:#bda7ff;
+  --lime:#c8ff38;
+  --yellow:#ffe34f;
+  --orange:#ff8738;
+  --ink:#111426;
+  --paper:#fffaff;
+  --glass:rgba(255,255,255,.48);
+  --line:rgba(17,20,38,.18);
+  --shadow:7px 8px 0 rgba(17,20,38,.14);
+  --mx:50%;
+  --my:50%;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 10% 15%, rgba(255,79,163,.42), transparent 20%),
+    radial-gradient(circle at 90% 12%, rgba(20,108,255,.38), transparent 23%),
+    radial-gradient(circle at 70% 80%, rgba(200,255,56,.3), transparent 20%),
+    linear-gradient(135deg,#d9ecff 0%,#fdf1ff 45%,#fffbd9 100%);
+  font-family:"Space Grotesk",Arial,sans-serif;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.16;
+  background-image:
+    radial-gradient(rgba(0,0,0,.35) .7px, transparent .7px);
+  background-size:7px 7px;
+  z-index:999;
+}
+
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+
+::selection{background:var(--pink);color:white}
+
+.cursor-dot,.cursor-ring{
+  position:fixed;
+  pointer-events:none;
+  z-index:10000;
+  transform:translate(-50%,-50%);
+}
+.cursor-dot{
+  width:9px;height:9px;border-radius:50%;
+  background:var(--ink);
+}
+.cursor-ring{
+  width:34px;height:34px;
+  border:2px solid var(--ink);
+  border-radius:50%;
+  transition:width .15s,height .15s,background .15s;
+}
+@media (pointer:coarse){.cursor-dot,.cursor-ring{display:none}}
+
+.top-strip{
+  background:var(--ink);
+  color:white;
+  padding:7px 0;
+  overflow:hidden;
+  white-space:nowrap;
+  font-family:"DM Mono",monospace;
+  font-size:11px;
+}
+.marquee{
+  display:inline-block;
+  min-width:200%;
+  animation:marquee 22s linear infinite;
+}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+.site{
+  width:min(1320px,94vw);
+  margin:auto;
+  padding:18px 0 70px;
+}
+
+.browser{
+  position:relative;
+  border:2px solid var(--ink);
+  border-radius:18px;
+  background:rgba(255,255,255,.34);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:var(--shadow);
+  overflow:visible;
+}
+
+.browser-bar{
+  min-height:52px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 13px;
+  border-bottom:2px solid var(--ink);
+  background:rgba(255,255,255,.65);
+  border-radius:16px 16px 0 0;
+}
+.traffic{display:flex;gap:6px}
+.traffic span{
+  width:13px;height:13px;border-radius:50%;
+  border:1.5px solid var(--ink);
+}
+.traffic span:nth-child(1){background:var(--pink)}
+.traffic span:nth-child(2){background:var(--yellow)}
+.traffic span:nth-child(3){background:var(--lime)}
+.address{
+  flex:1;
+  background:white;
+  border:1.5px solid var(--ink);
+  border-radius:999px;
+  padding:6px 14px;
+  font-family:"DM Mono",monospace;
+  font-size:11px;
+  min-width:0;
+}
+.address::before{content:"⌁  "}
+
+.hero{
+  min-height:610px;
+  position:relative;
+  padding:70px 6vw 90px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(255,255,255,.8),transparent 23%),
+    linear-gradient(125deg,rgba(20,108,255,.8),rgba(189,167,255,.55) 45%,rgba(255,79,163,.65));
+}
+
+.hero h1{
+  position:relative;
+  z-index:3;
+  margin:0;
+  font-family:"Press Start 2P",monospace;
+  font-size:clamp(44px,9vw,122px);
+  line-height:.95;
+  letter-spacing:-5px;
+  text-shadow:7px 7px 0 white, 12px 12px 0 var(--pink);
+  transform:rotate(-2deg);
+}
+.hero .tagline{
+  position:relative;
+  z-index:3;
+  max-width:620px;
+  margin:30px 0 0 4px;
+  font-family:"Libre Baskerville",serif;
+  font-size:clamp(18px,2.4vw,29px);
+  line-height:1.35;
+}
+.hero .tagline em{color:#fff;font-weight:bold;text-shadow:2px 2px 0 var(--blue)}
+
+.hero-actions{
+  position:relative;z-index:5;
+  display:flex;flex-wrap:wrap;gap:10px;
+  margin-top:35px;
+}
+.btn{
+  border:2px solid var(--ink);
+  padding:12px 17px;
+  border-radius:999px;
+  background:white;
+  box-shadow:4px 5px 0 var(--ink);
+  cursor:pointer;
+  font-weight:700;
+  transition:.15s;
+}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 3px 0 var(--ink)}
+.btn:active{transform:translate(4px,4px);box-shadow:none}
+.btn.blue{background:var(--blue);color:white}
+.btn.pink{background:var(--pink);color:white}
+.btn.lime{background:var(--lime)}
+.btn.yellow{background:var(--yellow)}
+
+.orb{
+  position:absolute;
+  border-radius:50%;
+  border:2px solid var(--ink);
+  box-shadow:inset -18px -20px 30px rgba(0,0,0,.1),inset 15px 12px 25px rgba(255,255,255,.7),7px 8px 0 rgba(17,20,38,.15);
+  animation:float 5s ease-in-out infinite;
+}
+.orb.one{width:190px;height:190px;background:linear-gradient(135deg,#fff,var(--pink));right:11%;top:13%}
+.orb.two{width:105px;height:105px;background:linear-gradient(135deg,#fff,var(--lime));right:30%;bottom:14%;animation-delay:-2s}
+.orb.three{width:74px;height:74px;background:linear-gradient(135deg,#fff,var(--yellow));left:48%;top:9%;animation-delay:-1s}
+@keyframes float{50%{transform:translateY(-18px) rotate(8deg)}}
+
+.star{
+  position:absolute;
+  font-size:40px;
+  color:white;
+  text-shadow:3px 3px 0 var(--ink);
+  animation:spin 7s linear infinite;
+}
+.star.s1{right:42%;top:24%}
+.star.s2{right:7%;bottom:19%;font-size:26px;animation-direction:reverse}
+.star.s3{left:6%;bottom:12%;font-size:25px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.sticker{
+  position:absolute;
+  z-index:6;
+  padding:11px 15px;
+  border:2px solid var(--ink);
+  box-shadow:4px 5px 0 var(--ink);
+  font-family:"DM Mono",monospace;
+  font-size:11px;
+  font-weight:700;
+  transform:rotate(-7deg);
+}
+.sticker.a{right:4%;top:38%;background:var(--lime)}
+.sticker.b{left:5%;bottom:7%;background:var(--yellow);transform:rotate(5deg)}
+.sticker.c{right:25%;bottom:7%;background:var(--pink);color:white;transform:rotate(-3deg)}
+
+.content{
+  position:relative;
+  padding:35px 4vw 70px;
+  background:rgba(255,255,255,.32);
+}
+
+.section{
+  margin:65px 0;
+  position:relative;
+}
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:22px;
+}
+.section-title{
+  font-family:"Press Start 2P",monospace;
+  font-size:clamp(19px,3vw,31px);
+  line-height:1.3;
+  margin:0;
+}
+.section-note{
+  font-family:"Libre Baskerville",serif;
+  font-size:14px;
+  max-width:400px;
+}
+
+.glass{
+  background:var(--glass);
+  border:1.5px solid rgba(255,255,255,.8);
+  outline:1.5px solid var(--line);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  box-shadow:var(--shadow);
+}
+
+.issue-grid{
+  display:grid;
+  grid-template-columns:1.15fr .85fr 1fr;
+  gap:18px;
+  align-items:start;
+}
+.issue{
+  min-height:270px;
+  padding:24px;
+  border:2px solid var(--ink);
+  position:relative;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.issue:nth-child(1){background:linear-gradient(145deg,var(--pink),var(--orange));transform:rotate(-1deg)}
+.issue:nth-child(2){background:linear-gradient(145deg,var(--blue),var(--lilac));transform:rotate(2deg);margin-top:32px}
+.issue:nth-child(3){background:linear-gradient(145deg,var(--lime),var(--yellow));transform:rotate(-2deg)}
+.issue small{font-family:"DM Mono",monospace}
+.issue h3{font-family:"Libre Baskerville",serif;font-size:35px;margin:45px 0 12px}
+.issue p{max-width:330px}
+.open-issue{
+  margin-top:12px;
+  background:white;
+  border:2px solid var(--ink);
+  border-radius:999px;
+  padding:8px 13px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.article-field{
+  min-height:500px;
+  position:relative;
+  border-top:2px solid var(--ink);
+  border-bottom:2px solid var(--ink);
+  overflow:hidden;
+  padding:55px 0;
+}
+.article-card{
+  width:min(370px,80vw);
+  padding:22px;
+  position:absolute;
+  border:2px solid var(--ink);
+  box-shadow:var(--shadow);
+  cursor:pointer;
+  transition:.2s;
+}
+.article-card:hover{transform:scale(1.03) rotate(0deg)!important;z-index:20}
+.article-card h3{font-family:"Libre Baskerville",serif;font-size:25px;margin:9px 0}
+.article-card p{font-size:14px;line-height:1.5}
+.article-card .tag{font-family:"DM Mono",monospace;font-size:10px}
+.ac1{left:3%;top:55px;background:#fff}
+.ac2{right:3%;top:150px;background:var(--lilac);transform:rotate(4deg)}
+.ac3{left:34%;top:310px;background:var(--yellow);transform:rotate(-3deg)}
+.photo{
+  position:absolute;
+  width:180px;height:230px;
+  border:3px solid var(--ink);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.photo::after{
+  content:"";
+  position:absolute;inset:0;
+  background:
+    linear-gradient(160deg,transparent 35%,rgba(255,255,255,.35)),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.18) 0 2px,transparent 2px 5px);
+  mix-blend-mode:screen;
+}
+.photo.one{
+  right:22%;top:10px;transform:rotate(-7deg);
+  background:
+    radial-gradient(circle at 30% 28%,#fff 0 8%,transparent 9%),
+    linear-gradient(135deg,var(--blue),var(--pink) 50%,var(--orange));
+}
+.photo.two{
+  left:17%;bottom:20px;transform:rotate(8deg);
+  background:
+    radial-gradient(circle at 65% 30%,var(--pink) 0 18%,transparent 19%),
+    linear-gradient(135deg,var(--lime),var(--blue));
+}
+
+.archive{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+.archive button{
+  min-height:120px;
+  border:2px solid var(--ink);
+  cursor:pointer;
+  box-shadow:4px 5px 0 var(--ink);
+  font-family:"Press Start 2P",monospace;
+  font-size:11px;
+  padding:15px;
+  text-align:left;
+  transition:.15s;
+}
+.archive button:nth-child(1){background:var(--blue);color:white}
+.archive button:nth-child(2){background:var(--pink);color:white}
+.archive button:nth-child(3){background:var(--lime)}
+.archive button:nth-child(4){background:var(--orange)}
+.archive button:hover{transform:translateY(-5px)}
+
+.playground{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+}
+.panel{
+  padding:22px;
+  border:2px solid var(--ink);
+  box-shadow:var(--shadow);
+  background:rgba(255,255,255,.65);
+}
+.panel h3{font-family:"Press Start 2P",monospace;font-size:15px;line-height:1.5}
+.thought{
+  min-height:145px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+  font-family:"Libre Baskerville",serif;
+  font-size:20px;
+  background:linear-gradient(135deg,var(--lilac),white,var(--pink));
+  border:2px dashed var(--ink);
+  margin:14px 0;
+}
+.counter{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-family:"DM Mono",monospace;
+  padding:12px;
+  background:var(--ink);
+  color:white;
+  border-radius:10px;
+}
+.clock{font-size:25px;color:var(--lime)}
+
+.radio{
+  background:linear-gradient(135deg,var(--blue),var(--pink));
+  color:white;
+}
+.radio-screen{
+  background:rgba(0,0,0,.72);
+  padding:17px;
+  border:2px solid white;
+  font-family:"DM Mono",monospace;
+  margin:15px 0;
+}
+.eq{display:flex;gap:4px;height:35px;align-items:end}
+.eq span{display:block;width:8px;background:var(--lime);animation:eq .8s ease-in-out infinite alternate}
+.eq span:nth-child(2){animation-delay:-.3s}.eq span:nth-child(3){animation-delay:-.5s}.eq span:nth-child(4){animation-delay:-.1s}.eq span:nth-child(5){animation-delay:-.4s}
+@keyframes eq{from{height:6px}to{height:31px}}
+.radio-controls{display:flex;gap:8px;flex-wrap:wrap}
+.audio-btn{
+  border:2px solid white;background:white;color:var(--ink);
+  border-radius:999px;padding:8px 13px;cursor:pointer;font-weight:bold;
+}
+input[type="range"]{width:100%}
+
+.guestbook form{display:flex;gap:8px}
+.guestbook input{
+  flex:1;min-width:0;
+  border:2px solid var(--ink);
+  padding:12px;
+  border-radius:10px;
+  background:white;
+}
+.notes{margin-top:15px;display:flex;gap:10px;flex-wrap:wrap}
+.note{
+  padding:12px 14px;
+  background:var(--yellow);
+  border:2px solid var(--ink);
+  transform:rotate(-2deg);
+  font-family:"DM Mono",monospace;
+  font-size:11px;
+}
+.note:nth-child(2n){background:var(--lilac);transform:rotate(2deg)}
+.note:nth-child(3n){background:var(--lime)}
+
+.searchbox{
+  display:flex;gap:8px;
+  padding:15px;
+  border:2px solid var(--ink);
+  background:var(--blue);
+}
+.searchbox input{
+  flex:1;min-width:0;border:2px solid var(--ink);padding:12px;border-radius:8px;
+}
+.search-result{
+  margin-top:15px;
+  padding:15px;
+  background:white;
+  border:2px solid var(--ink);
+  display:none;
+}
+
+.footer{
+  margin-top:80px;
+  padding:25px;
+  background:var(--ink);
+  color:white;
+  position:relative;
+  overflow:hidden;
+}
+.footer-marquee{
+  font-family:"Press Start 2P",monospace;
+  font-size:14px;
+  white-space:nowrap;
+  animation:marquee 16s linear infinite;
+}
+.footer-links{
+  display:flex;flex-wrap:wrap;gap:10px;
+  margin-top:25px;
+}
+.footer-links a{
+  padding:8px 11px;
+  border:1px solid white;
+  border-radius:999px;
+}
+.footer-links a:hover{background:white;color:var(--ink)}
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:8000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(17,20,38,.48);
+  backdrop-filter:blur(5px);
+}
+.modal.show{display:flex}
+.modal-window{
+  width:min(650px,94vw);
+  max-height:85vh;
+  overflow:auto;
+  border:2px solid var(--ink);
+  background:var(--paper);
+  box-shadow:10px 11px 0 var(--ink);
+}
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:12px 15px;
+  background:linear-gradient(90deg,var(--blue),var(--pink));
+  color:white;
+  border-bottom:2px solid var(--ink);
+  font-family:"DM Mono",monospace;
+}
+.close{border:2px solid var(--ink);background:white;cursor:pointer;width:35px;height:35px;border-radius:50%}
+.modal-body{padding:25px;line-height:1.7}
+.modal-body h2{font-family:"Libre Baskerville",serif;font-size:32px}
+
+#secret{
+  position:fixed;
+  right:18px;bottom:18px;
+  z-index:7000;
+  width:46px;height:46px;
+  border:2px solid var(--ink);
+  border-radius:50%;
+  background:var(--yellow);
+  cursor:pointer;
+  box-shadow:4px 5px 0 var(--ink);
+  font-size:20px;
+}
+
+.drag-window{
+  position:fixed;
+  z-index:6000;
+  width:270px;
+  border:2px solid var(--ink);
+  box-shadow:7px 8px 0 var(--ink);
+  background:white;
+  display:none;
+}
+.drag-window.show{display:block}
+.drag-head{
+  cursor:grab;
+  padding:9px 11px;
+  background:var(--pink);
+  color:white;
+  border-bottom:2px solid var(--ink);
+  font-family:"DM Mono",monospace;
+  display:flex;
+  justify-content:space-between;
+}
+.drag-body{padding:15px;font-size:13px;line-height:1.5}
+.drag-body .mini-sticker{
+  display:inline-block;
+  padding:6px 8px;
+  margin:4px;
+  border:1.5px solid var(--ink);
+  background:var(--lime);
+  transform:rotate(-3deg);
+}
+
+.theme-chaos{
+  filter:hue-rotate(35deg) saturate(1.25);
+}
+.theme-chaos .hero{
+  background:linear-gradient(135deg,var(--orange),var(--yellow),var(--lime),var(--pink)) !important;
+}
+.theme-chaos .section-title{transform:skewX(-8deg)}
+
+@media(max-width:850px){
+  .issue-grid,.playground{grid-template-columns:1fr}
+  .archive{grid-template-columns:1fr 1fr}
+  .article-field{min-height:760px}
+  .photo.one{right:4%;top:430px}
+  .photo.two{left:4%;bottom:25px}
+  .ac1{left:3%;top:35px}
+  .ac2{right:3%;top:210px}
+  .ac3{left:8%;top:385px}
+}
+@media(max-width:520px){
+  .site{width:96vw}
+  .hero{padding:55px 6vw 80px;min-height:600px}
+  .hero h1{font-size:42px;letter-spacing:-2px}
+  .sticker.a{right:3%;top:47%}
+  .issue-grid{gap:25px}
+  .archive{grid-template-columns:1fr}
+  .article-card{width:78vw}
+  .photo{width:125px;height:165px}
+  .photo.one{right:4%;top:500px}
+  .photo.two{left:2%;bottom:15px}
+  .ac1{top:25px}.ac2{top:210px}.ac3{top:400px}
+  .guestbook form{flex-direction:column}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="top-strip">
+  <div class="marquee">
+    ★ TEENTECH ★ THE INTERNET IS A PLAYGROUND ★ NEW ISSUE ONLINE ★ TECHNOLOGY / CULTURE / CREATIVITY ★
+    ★ TEENTECH ★ THE INTERNET IS A PLAYGROUND ★ NEW ISSUE ONLINE ★ TECHNOLOGY / CULTURE / CREATIVITY ★
+  </div>
+</div>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<main class="site">
+  <div class="browser">
+    <div class="browser-bar">
+      <div class="traffic"><span></span><span></span><span></span></div>
+      <div class="address">teentech.digital / home</div>
+      <button class="btn" id="openMini" type="button" style="padding:6px 11px">✦</button>
+    </div>
+
+    <section class="hero" id="home">
+      <div class="orb one"></div>
+      <div class="orb two"></div>
+      <div class="orb three"></div>
+      <div class="star s1">✦</div>
+      <div class="star s2">★</div>
+      <div class="star s3">✧</div>
+
+      <div class="sticker a">100% ONLINE<br>NO THOUGHTS</div>
+      <div class="sticker b">made by teens ★</div>
+      <div class="sticker c">CTRL + D US</div>
+
+      <h1>TEEN<br>TECH</h1>
+      <p class="tagline">
+        a digital playground for people who are <em>chronically curious.</em>
+        technology, culture, creativity, weird internet things & everything in between.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn blue" data-open="issueModal" type="button">OPEN THE ZINE →</button>
+        <button class="btn pink" id="randomBtn" type="button">GIVE ME A THOUGHT</button>
+        <button class="btn lime" id="themeBtn" type="button">MAKE IT WEIRDER ✦</button>
+      </div>
+    </section>
+
+    <div class="content">
+
+      <section class="section" id="issues">
+        <div class="section-head">
+          <div>
+            <p style="font-family:'DM Mono',monospace;font-size:11px;margin:0 0 8px">01 / CURRENT ISSUES</p>
+            <h2 class="section-title">THE ZINE<br>IS ALIVE.</h2>
+          </div>
+          <p class="section-note">click around. open things. break things. that's literally why we made a website.</p>
+        </div>
+
+        <div class="issue-grid">
+          <!-- ✎ EDIT: change issue titles, descriptions and links here -->
+          <article class="issue">
+            <small>ISSUE 01 — ONLINE</small>
+            <h3>THE<br>ALGORITHM</h3>
+            <p>What happens when the thing deciding what we see starts knowing us a little too well?</p>
+            <button class="open-issue" data-title="THE ALGORITHM" data-copy="Replace this with your real issue description, essays and links.">OPEN ISSUE ↗</button>
+          </article>
+
+          <article class="issue">
+            <small>ISSUE 02 — COMING SOON</small>
+            <h3>CTRL<br>+ ALT<br>+ TEEN</h3>
+            <p>Growing up online, offline and somewhere weirdly between the two.</p>
+            <button class="open-issue" data-title="CTRL + ALT + TEEN" data-copy="Coming soon. Add your contributors, articles and issue link here.">PEEK INSIDE ↗</button>
+          </article>
+
+          <article class="issue">
+            <small>ISSUE 03 — ARCHIVE</small>
+            <h3>NO<br>SIGNAL</h3>
+            <p>A collection of thoughts for when the Wi-Fi disappears.</p>
+            <button class="open-issue" data-title="NO SIGNAL" data-copy="Archive issue. Replace this with your real archive content.">OPEN ARCHIVE ↗</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="read">
+        <div class="section-head">
+          <div>
+            <p style="font-family:'DM Mono',monospace;font-size:11px;margin:0 0 8px">02 / LATEST DROPS</p>
+            <h2 class="section-title">READ<br>THIS.</h2>
+          </div>
+          <p class="section-note">articles should feel like objects you found on the internet at 2:13 a.m.</p>
+        </div>
+
+        <div class="article-field">
+          <!-- ✎ EDIT: replace these article titles/copy with your actual pieces -->
+          <article class="article-card ac1" data-open-article="Why Your Feed Knows You">
+            <span class="tag">TECH / CULTURE</span>
+            <h3>why does my feed know me better than i do?</h3>
+            <p>Algorithms don't just recommend things. They quietly build little mirrors of us. What happens when we start believing the reflection?</p>
+            <button class="open-issue" type="button">READ PIECE →</button>
+          </article>
+
+          <article class="article-card ac2" data-open-article="The Internet Has a Memory">
+            <span class="tag">INTERNET / ESSAY</span>
+            <h3>the internet has a memory. you don't.</h3>
+            <p>Old usernames. Deleted blogs. Screenshots you forgot existed. A tiny meditation on digital permanence.</p>
+            <button class="open-issue" type="button">READ PIECE →</button>
+          </article>
+
+          <article class="article-card ac3" data-open-article="Teenage Software">
+            <span class="tag">CREATIVITY / DIGITAL LIFE</span>
+            <h3>teenage software is still under construction.</h3>
+            <p>Maybe growing up is just downloading updates while everyone else pretends they know the new interface.</p>
+            <button class="open-issue" type="button">READ PIECE →</button>
+          </article>
+
+          <div class="photo one" title="✎ EDIT: replace this CSS artwork with a real image if desired"></div>
+          <div class="photo two"></div>
+        </div>
+      </section>
+
+      <section class="section" id="archive">
+        <div class="section-head">
+          <div>
+            <p style="font-family:'DM Mono',monospace;font-size:11px;margin:0 0 8px">03 / THE ARCHIVE</p>
+            <h2 class="section-title">DIGITAL<br>ATTIC.</h2>
+          </div>
+          <p class="section-note">old issues, forgotten tabs, cultural fossils and things we refuse to delete.</p>
+        </div>
+
+        <div class="archive">
+          <button type="button" data-archive="Issue 00 / BEFORE THE INTERNET">ISSUE 00<br><br>BEFORE THE INTERNET</button>
+          <button type="button" data-archive="Playlist / Main Character Syndrome">PLAYLIST<br><br>MAIN CHARACTER SYNDROME</button>
+          <button type="button" data-archive="Gallery / Pixel Dust">GALLERY<br><br>PIXEL DUST</button>
+          <button type="button" data-archive="File / INTERNET LORE">FILE<br><br>INTERNET LORE</button>
+        </div>
+      </section>
+
+      <section class="section" id="playground">
+        <div class="section-head">
+          <div>
+            <p style="font-family:'DM Mono',monospace;font-size:11px;margin:0 0 8px">04 / PLAYGROUND</p>
+            <h2 class="section-title">DO<br>THINGS.</h2>
+          </div>
+          <p class="section-note">because an interactive zine should actually be interactive.</p>
+        </div>
+
+        <div class="playground">
+          <div class="panel">
+            <h3>💬 RANDOM INTERNET THOUGHT</h3>
+            <div class="thought" id="thought">the internet remembers everything except what you actually wanted to save.</div>
+            <button class="btn yellow" id="thoughtBtn" type="button">ANOTHER ONE →</button>
+          </div>
+
+          <div class="panel radio">
+            <h3>💿 TEENTECH RADIO</h3>
+            <div class="radio-screen">
+              <div style="display:flex;justify-content:space-between;gap:10px">
+                <span>NOW PLAYING</span><span id="radioStatus">01 / PLAYLIST</span>
+              </div>
+              <strong style="display:block;font-size:18px;margin:12px 0">✦ TEENTECH FM ✦</strong>
+              <div class="eq" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="radio-controls">
+              <button class="audio-btn" id="playBtn" type="button">▶ PLAY</button>
+              <button class="audio-btn" id="stopBtn" type="button">■ STOP</button>
+            </div>
+            <label style="display:block;margin-top:12px;font-size:12px">
+              VOLUME
+              <input id="volume" type="range" min="0" max="1" step=".01" value=".5">
+            </label>
+            <p style="font-size:11px;margin-bottom:0">
+              ✎ EDIT <code>AUDIO_URL</code> in the script near the bottom to use your own direct audio file.
+              Browsers may block sound autoplay until the visitor interacts with the page.
+            </p>
+          </div>
+
+          <div class="panel">
+            <h3>📟 CURRENTLY ONLINE</h3>
+            <div class="counter">
+              <span>LOCAL TIME</span>
+              <span class="clock" id="clock">00:00:00</span>
+            </div>
+            <p style="font-family:'Libre Baskerville',serif;margin-bottom:0">
+              Somewhere, someone is opening seventeen tabs and calling it research.
+            </p>
+          </div>
+
+          <div class="panel guestbook">
+            <h3>📎 TINY GUESTBOOK</h3>
+            <p>leave a little piece of yourself on the site.</p>
+            <form id="guestForm">
+              <input id="guestInput" maxlength="80" placeholder="type something..." autocomplete="off">
+              <button class="btn pink" type="submit">POST</button>
+            </form>
+            <div class="notes" id="notes"></div>
+          </div>
+
+          <div class="panel">
+            <h3>🔎 OLD INTERNET SEARCH</h3>
+            <div class="searchbox">
+              <input id="searchInput" placeholder="search teentech..." aria-label="Search TeenTech">
+              <button class="btn lime" id="searchBtn" type="button">GO</button>
+            </div>
+            <div class="search-result" id="searchResult"></div>
+          </div>
+
+          <div class="panel">
+            <h3>🪟 OPEN A WINDOW</h3>
+            <p>click the button and drag the tiny internet window around.</p>
+            <button class="btn blue" id="windowBtn" type="button">OPEN .EXE</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="glass" style="padding:28px;transform:rotate(-1deg)">
+          <p style="font-family:'DM Mono',monospace;font-size:11px">05 / ABOUT TEENTECH</p>
+          <h2 style="font-family:'Libre Baskerville',serif;font-size:clamp(30px,5vw,60px);margin:10px 0">
+            made for the people who never stopped clicking “learn more.”
+          </h2>
+          <p style="max-width:760px;line-height:1.75;font-size:16px">
+            TeenTech is a youth-led zine exploring the strange overlap between technology,
+            culture, creativity and everyday life. It's for people who are curious enough
+            to open the suspicious-looking link just to see what happens.
+          </p>
+          <button class="btn blue" data-open="aboutModal" type="button">MEET THE PEOPLE BEHIND IT →</button>
+        </div>
+      </section>
+
+    </div>
+
+    <footer class="footer">
+      <div class="footer-marquee">★ TEENTECH ★ MADE ON THE INTERNET ★ MADE BY TEENS ★ STAY CURIOUS ★ CLICK EVERYTHING ★</div>
+      <div class="footer-links">
+        <!-- ✎ EDIT: replace these placeholder links -->
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener">INSTAGRAM ↗</a>
+        <a href="#" onclick="return false">SUBMIT A PIECE ↗</a>
+        <a href="#" onclick="return false">CONTACT ↗</a>
+        <a href="#about">ABOUT</a>
+      </div>
+      <p style="font-family:'DM Mono',monospace;font-size:10px;margin-top:25px">© 2026 TEENTECH ★ built with too many tabs open</p>
+    </footer>
+  </div>
+</main>
+
+<button id="secret" type="button" aria-label="secret button">★</button>
+
+<div class="drag-window" id="dragWindow">
+  <div class="drag-head" id="dragHandle">
+    <span>teentech.exe</span>
+    <button id="closeDrag" type="button" style="border:0;background:none;color:white;cursor:pointer;font-weight:bold">×</button>
+  </div>
+  <div class="drag-body">
+    <strong>YOU FOUND A WINDOW.</strong>
+    <p>There is no useful reason for this to exist.</p>
+    <span class="mini-sticker">CTRL</span>
+    <span class="mini-sticker">ALT</span>
+    <span class="mini-sticker">CLICK</span>
+    <span class="mini-sticker">CHAOS</span>
+  </div>
+</div>
+
+<div class="modal" id="issueModal" aria-hidden="true">
+  <div class="modal-window">
+    <div class="modal-head">
+      <span>TEENTECH / ISSUE READER</span>
+      <button class="close" type="button" data-close>×</button>
+    </div>
+    <div class="modal-body">
+      <h2 id="modalTitle">WELCOME TO TEENTECH</h2>
+      <p id="modalCopy">This is your interactive issue reader. Replace the demo copy with your real articles, contributors and issue links.</p>
+      <button class="btn blue" type="button" data-close>BACK TO THE INTERNET</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="aboutModal" aria-hidden="true">
+  <div class="modal-window">
+    <div class="modal-head">
+      <span>ABOUT / TEENTECH</span>
+      <button class="close" type="button" data-close>×</button>
+    </div>
+    <div class="modal-body">
+      <h2>hi, we're teentech.</h2>
+      <p>
+        ✎ EDIT THIS SECTION with your actual editorial statement, team information,
+        staff names and submission details.
+      </p>
+      <p>
+        Think of this window as a digital masthead rather than another boring “about us” page.
+      </p>
+    </div>
+  </div>
+</div>
+
+<audio id="radioAudio" preload="none" loop></audio>
+
+<script>
+/* ==========================================================
+   ✎ EDITABLE SETTINGS
+   ========================================================== */
+
+/* Paste a DIRECT .mp3 or .ogg URL here.
+   Example:
+   const AUDIO_URL = "https://your-site.com/music.mp3";
+*/
+const AUDIO_URL = "";
+
+/* Add/change your random thoughts here. */
+const THOUGHTS = [
+  "the internet remembers everything except what you actually wanted to save.",
+  "somewhere right now, someone is making a playlist instead of answering their messages.",
+  "your browser history is a more accurate autobiography than your diary.",
+  "maybe the algorithm is just a really complicated form of peer pressure.",
+  "we were supposed to use the internet for homework.",
+  "the loading screen is part of the experience.",
+  "being online is a place. argue with the pixel.",
+  "every abandoned blog was somebody's tiny universe.",
+  "close the tab. no, not that one. the other 37.",
+  "you are allowed to make something useless just because it is beautiful."
+];
+
+/* ==========================================================
+   INTERACTION ENGINE
+   ========================================================== */
+
+const root = document.documentElement;
+const body = document.body;
+
+/* Custom cursor */
+const dot = document.getElementById("cursorDot");
+const ring = document.getElementById("cursorRing");
+let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+window.addEventListener("mousemove", e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  dot.style.left = mouseX + "px";
+  dot.style.top = mouseY + "px";
+});
+
+function cursorLoop(){
+  ringX += (mouseX - ringX) * .18;
+  ringY += (mouseY - ringY) * .18;
+  ring.style.left = ringX + "px";
+  ring.style.top = ringY + "px";
+  requestAnimationFrame(cursorLoop);
+}
+cursorLoop();
+
+document.querySelectorAll("button,a,input").forEach(el => {
+  el.addEventListener("mouseenter", () => {
+    ring.style.width = "48px";
+    ring.style.height = "48px";
+    ring.style.background = "rgba(255,79,163,.18)";
+  });
+  el.addEventListener("mouseleave", () => {
+    ring.style.width = "34px";
+    ring.style.height = "34px";
+    ring.style.background = "transparent";
+  });
+});
+
+/* Clock */
+function updateClock(){
+  const now = new Date();
+  document.getElementById("clock").textContent =
+    [now.getHours(),now.getMinutes(),now.getSeconds()]
+    .map(n => String(n).padStart(2,"0")).join(":");
+}
+updateClock();
+setInterval(updateClock,1000);
+
+/* Random thought */
+function randomThought(){
+  const box = document.getElementById("thought");
+  const old = box.textContent;
+  let next = old;
+  while(next === old) next = THOUGHTS[Math.floor(Math.random()*THOUGHTS.length)];
+  box.style.transform = "scale(.97) rotate(-1deg)";
+  setTimeout(() => {
+    box.textContent = next;
+    box.style.transform = "";
+  },100);
+}
+document.getElementById("randomBtn").addEventListener("click", () => {
+  document.getElementById("playground").scrollIntoView({behavior:"smooth"});
+  randomThought();
+});
+document.getElementById("thoughtBtn").addEventListener("click", randomThought);
+
+/* Theme easter egg */
+document.getElementById("themeBtn").addEventListener("click", () => {
+  body.classList.toggle("theme-chaos");
+  document.getElementById("themeBtn").textContent =
+    body.classList.contains("theme-chaos") ? "ENOUGH CHAOS ✦" : "MAKE IT WEIRDER ✦";
+});
+
+/* Modal helpers */
+function openModal(id,title,copy){
+  const modal = document.getElementById(id);
+  if(title) document.getElementById("modalTitle").textContent = title;
+  if(copy) document.getElementById("modalCopy").textContent = copy;
+  modal.classList.add("show");
+  modal.setAttribute("aria-hidden","false");
+}
+function closeModal(modal){
+  modal.classList.remove("show");
+  modal.setAttribute("aria-hidden","true");
+}
+
+document.querySelectorAll("[data-open]").forEach(btn => {
+  btn.addEventListener("click", () => openModal(btn.dataset.open));
+});
+document.querySelectorAll("[data-close]").forEach(btn => {
+  btn.addEventListener("click", () => closeModal(btn.closest(".modal")));
+});
+document.querySelectorAll(".modal").forEach(modal => {
+  modal.addEventListener("click", e => {
+    if(e.target === modal) closeModal(modal);
+  });
+});
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape"){
+    document.querySelectorAll(".modal.show").forEach(closeModal);
+  }
+});
+
+/* Issue cards */
+document.querySelectorAll(".open-issue").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const title = btn.dataset.title || "TEENTECH";
+    const copy = btn.dataset.copy || "Replace this demo text with your real content.";
+    openModal("issueModal",title,copy);
+  });
+});
+
+/* Article cards */
+document.querySelectorAll("[data-open-article]").forEach(card => {
+  card.addEventListener("click", e => {
+    if(e.target.tagName === "BUTTON"){
+      openModal("issueModal",card.dataset.openArticle,
+        "This is a demo article reader. Replace this interaction with the URL or article content for your real piece.");
+    }
+  });
+});
+
+/* Archive */
+document.querySelectorAll("[data-archive]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    openModal("issueModal",btn.dataset.archive,
+      "This archive tile is ready for your real issue, playlist, gallery or internet-lore page.");
+  });
+});
+
+/* Guestbook — local for the current page session */
+const guestForm = document.getElementById("guestForm");
+const guestInput = document.getElementById("guestInput");
+const notes = document.getElementById("notes");
+
+guestForm.addEventListener("submit", e => {
+  e.preventDefault();
+  const text = guestInput.value.trim();
+  if(!text) return;
+
+  const note = document.createElement("div");
+  note.className = "note";
+  note.textContent = text;
+  notes.prepend(note);
+  guestInput.value = "";
+
+  if(notes.children.length > 6) notes.lastElementChild.remove();
+});
+
+/* Search */
+const searchInput = document.getElementById("searchInput");
+const searchResult = document.getElementById("searchResult");
+
+function runSearch(){
+  const q = searchInput.value.trim();
+  if(!q){
+    searchResult.style.display = "block";
+    searchResult.textContent = "type something first, internet explorer.";
+    return;
+  }
+  searchResult.style.display = "block";
+  searchResult.innerHTML =
+    "<strong>SEARCH RESULT:</strong><br><br>" +
+    "we searched the extremely sophisticated TeenTech database for <b>" +
+    q.replace(/[<>&"]/g,"") +
+    "</b>.<br><br>Result: probably something interesting. Connect this search box to your real archive or site search later.";
+}
+document.getElementById("searchBtn").addEventListener("click",runSearch);
+searchInput.addEventListener("keydown",e=>{if(e.key==="Enter")runSearch()});
+
+/* Radio */
+const audio = document.getElementById("radioAudio");
+const playBtn = document.getElementById("playBtn");
+const stopBtn = document.getElementById("stopBtn");
+const volume = document.getElementById("volume");
+
+if(AUDIO_URL) audio.src = AUDIO_URL;
+audio.volume = Number(volume.value);
+
+async function playRadio(){
+  if(!AUDIO_URL){
+    document.getElementById("radioStatus").textContent = "ADD AUDIO_URL ✎";
+    return;
+  }
+  try{
+    await audio.play();
+    playBtn.textContent = "❚❚ PAUSE";
+    document.getElementById("radioStatus").textContent = "01 / LIVE";
+  }catch(err){
+    document.getElementById("radioStatus").textContent = "CLICK PLAY";
+  }
+}
+playBtn.addEventListener("click", async () => {
+  if(audio.paused) await playRadio();
+  else{
+    audio.pause();
+    playBtn.textContent = "▶ PLAY";
+    document.getElementById("radioStatus").textContent = "01 / PAUSED";
+  }
+});
+stopBtn.addEventListener("click",()=>{
+  audio.pause();
+  audio.currentTime = 0;
+  playBtn.textContent = "▶ PLAY";
+  document.getElementById("radioStatus").textContent = "01 / STOPPED";
+});
+volume.addEventListener("input",()=>audio.volume=Number(volume.value));
+
+/* Attempt autoplay. Browsers may block audible autoplay by policy. */
+if(AUDIO_URL){
+  window.addEventListener("load",()=>playRadio());
+}
+
+/* Draggable mini window */
+const dragWindow = document.getElementById("dragWindow");
+const dragHandle = document.getElementById("dragHandle");
+let dragging = false, offsetX = 0, offsetY = 0;
+
+document.getElementById("windowBtn").addEventListener("click",()=>{
+  dragWindow.classList.add("show");
+  dragWindow.style.left = "calc(50% - 135px)";
+  dragWindow.style.top = "120px";
+});
+document.getElementById("openMini").addEventListener("click",()=>{
+  dragWindow.classList.add("show");
+  dragWindow.style.left = "calc(50% - 135px)";
+  dragWindow.style.top = "120px";
+});
+document.getElementById("closeDrag").addEventListener("click",()=>dragWindow.classList.remove("show"));
+
+dragHandle.addEventListener("pointerdown",e=>{
+  dragging=true;
+  offsetX=e.clientX-dragWindow.offsetLeft;
+  offsetY=e.clientY-dragWindow.offsetTop;
+  dragHandle.setPointerCapture(e.pointerId);
+});
+dragHandle.addEventListener("pointermove",e=>{
+  if(!dragging) return;
+  dragWindow.style.left = Math.max(0,Math.min(window.innerWidth-dragWindow.offsetWidth,e.clientX-offsetX))+"px";
+  dragWindow.style.top = Math.max(0,Math.min(window.innerHeight-dragWindow.offsetHeight,e.clientY-offsetY))+"px";
+});
+dragHandle.addEventListener("pointerup",()=>dragging=false);
+
+/* Secret button */
+document.getElementById("secret").addEventListener("click",()=>{
+  body.classList.toggle("theme-chaos");
+  document.getElementById("secret").textContent =
+    body.classList.contains("theme-chaos") ? "☠" : "★";
+});
+
+/* Tiny keyboard easter egg */
+let keyBuffer = "";
+document.addEventListener("keydown",e=>{
+  if(e.key.length === 1){
+    keyBuffer += e.key.toLowerCase();
+    keyBuffer = keyBuffer.slice(-8);
+    if(keyBuffer === "teentech"){
+      body.classList.toggle("theme-chaos");
+      keyBuffer = "";
+    }
+  }
+});
+
+/* Make decorative objects slightly responsive to pointer movement */
+window.addEventListener("mousemove",e=>{
+  const x = (e.clientX / window.innerWidth - .5) * 2;
+  const y = (e.clientY / window.innerHeight - .5) * 2;
+  root.style.setProperty("--mx",(e.clientX/window.innerWidth*100)+"%");
+  root.style.setProperty("--my",(e.clientY/window.innerHeight*100)+"%");
+  document.querySelectorAll(".orb").forEach((orb,i)=>{
+    const strength = (i+1)*3;
+    orb.style.marginLeft = (x*strength)+"px";
+    orb.style.marginTop = (y*strength)+"px";
+  });
+});
+</script>
+</body>
+</html>
